@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>픽셀 아트 도안 그리기</title>
+<link rel="stylesheet" href="color.css" />
+</head>
+<body>
+  <div class="toolbar">
+    <input type="color" id="colorPicker" value="#000000" />
+    <button id="eraserBtn">지우개</button>
+    <button id="clearBtn">초기화</button>
+    <label>
+      행:
+      <input type="number" id="rowsInput" value="32" min="5" max="64" />
+    </label>
+    <label>
+      열:
+      <input type="number" id="colsInput" value="32" min="5" max="64" />
+    </label>
+    <button id="resizeBtn">캔버스 크기 변경</button>
+  </div>
+  <div id="grid"></div>
+
+  <script src="color.js"></script>
+  <script>
+  document.addEventListener('mousemove', (e) => {
+    const trail = document.createElement('div');
+    trail.className = 'trail';
+    trail.style.left = `${e.clientX}px`;
+    trail.style.top = `${e.clientY}px`;
+
+    setTimeout(() => {
+      trail.style.transform = `translateY(${100 + Math.random() * 100}px) scale(${0.5 + Math.random()})`;
+      trail.style.opacity = 0;
+    }, 0);
+
+    document.body.appendChild(trail);
+
+    setTimeout(() => {
+      trail.remove();
+    }, 1000);
+  });
+</script>
+
+</body>
+</html>
