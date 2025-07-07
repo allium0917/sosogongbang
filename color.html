@@ -6,6 +6,18 @@
 <title>픽셀 아트 도안 그리기</title>
 <link rel="stylesheet" href="color.css" />
 </head>
+  <header class="header">
+    <div class="logo hnavbar"><a href="home.html">so so gongbang</a></div>
+  </header>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="color.html">배색</a></li>
+      <li><a href="#">도안 공유</a></li>
+      <li><a href="#">커뮤니티</a></li>
+      <li><a href="#">룰렛</a></li>
+    </ul>
+  </nav>
 <body>
   <div class="toolbar">
     <input type="color" id="colorPicker" value="#000000" />
@@ -13,11 +25,11 @@
     <button id="clearBtn">초기화</button>
     <label>
       행:
-      <input type="number" id="rowsInput" value="32" min="5" max="64" />
+      <input type="number" id="rowsInput" value="16" min="5" max="64" />
     </label>
     <label>
       열:
-      <input type="number" id="colsInput" value="32" min="5" max="64" />
+      <input type="number" id="colsInput" value="16" min="5" max="64" />
     </label>
     <button id="resizeBtn">캔버스 크기 변경</button>
   </div>
@@ -25,7 +37,15 @@
 
   <script src="color.js"></script>
   <script>
+  let lastTrailTime = 0;
+
   document.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+
+    if (now - lastTrailTime < 80) return;
+
+    lastTrailTime = now;
+
     const trail = document.createElement('div');
     trail.className = 'trail';
     trail.style.left = `${e.clientX}px`;

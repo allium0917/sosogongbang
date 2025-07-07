@@ -6,8 +6,8 @@ const rowsInput = document.getElementById('rowsInput');
 const colsInput = document.getElementById('colsInput');
 const resizeBtn = document.getElementById('resizeBtn');
 
-let ROWS = 32;
-let COLS = 32;
+let ROWS = 16;
+let COLS = 16;
 let currentColor = colorPicker.value;
 let mouseDown = false;
 let isErasing = false;
@@ -16,6 +16,7 @@ let cellColors = [];
 
 colorPicker.addEventListener('input', (e) => {
   currentColor = e.target.value;
+  grid.style.borderColor = currentColor;
   if (isErasing) {
     isErasing = false;
     eraserBtn.classList.remove('active');
@@ -39,6 +40,13 @@ function setCellColor(row, col, color) {
   if (!cellColors[row]) cellColors[row] = [];
   cellColors[row][col] = color;
 }
+
+grid.addEventListener('click', function (e) {
+  if (e.target.classList.contains('cell')) {
+    const selectedColor = colorPicker.value;
+    e.target.style.backgroundColor = selectedColor;
+  }
+});
 
 function createGrid(rows, cols) {
   grid.innerHTML = '';
